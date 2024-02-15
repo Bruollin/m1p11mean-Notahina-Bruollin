@@ -27,10 +27,12 @@ const serviceRoutes = require('./routes/service.routes');
 const utilisateurRoutes = require('./routes/utilisateur.routes');
 const tacheRoutes = require('./routes/tache.routes');
 const rdvRoutes = require('./routes/rendezvous.routes');
+const manager = require('./routes/manager.routes');
 app.use('/services', serviceRoutes);
 app.use('/utilisateurs', utilisateurRoutes);
 app.use('/taches', tacheRoutes);
 app.use('/rendezvous', rdvRoutes);
+app.use('/manager', manager);
 
 
 
