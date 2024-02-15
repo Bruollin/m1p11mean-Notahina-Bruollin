@@ -1,0 +1,13 @@
+const express = require('express');
+const utilisateurController = require('../controllers/utilisateur.controller');
+
+const router = express.Router();
+
+// Définir les routes pour gérer les services
+router.get('/:id', utilisateurController.findById);
+router.get('/', utilisateurController.findAll);
+router.get('/disponible', utilisateurController.findUtilisateurDispo);
+router.post('/', utilisateurController.ajouterUtilisateur);
+router.put('/:id', utilisateurController.updateUtilisateur);
+
+module.exports = router;
