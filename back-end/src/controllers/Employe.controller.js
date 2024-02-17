@@ -46,5 +46,14 @@ class EmployeController {
             res.status(500).send({ message: err.message });
         }
     }
+
+    async findByServiceId(req, res) {
+        try {
+            const employes = await Employe.find({ service_id: req.params.service_id });
+            res.status(200).send(employes);
+        } catch (err) {
+            res.status(500).send({ message: err.message });
+        }
+    }
 }
 module.exports = new EmployeController();
