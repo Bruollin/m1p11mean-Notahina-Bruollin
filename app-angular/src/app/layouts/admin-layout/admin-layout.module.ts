@@ -16,10 +16,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListeServicesComponent } from 'src/app/pages/liste-services/liste-services.component';
 import { CalendrierComponent } from 'src/app/pages/accueil/calendrier/calendrier.component';
 import { HistoriqueComponent } from 'src/app/pages/accueil/historique/historique.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DetailServiceComponent } from 'src/app/pages/liste-services/detail-service/detail-service.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
+    MatDialogModule,
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
@@ -35,6 +38,7 @@ import { HistoriqueComponent } from 'src/app/pages/accueil/historique/historique
     MapsComponent,
     AccueilComponent,
     ListeServicesComponent,
+    DetailServiceComponent,
     CalendrierComponent,
     HistoriqueComponent
   ]

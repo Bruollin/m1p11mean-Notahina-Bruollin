@@ -1,15 +1,28 @@
 const Service = require('../models/service.model');
 
 class ServiceController {
+    // async ajouterService(req, res) {
+    //     try {
+    //         const service = new Service(req.body);
+    //         await service.save();
+    //         res.status(201).send(service);
+    //     } catch (err) {
+    //         res.status(500).send({ message: err.message });
+    //     }
+    // }
     async ajouterService(req, res) {
         try {
             const service = new Service(req.body);
+    
+            service.etat = true;
+    
             await service.save();
             res.status(201).send(service);
         } catch (err) {
             res.status(500).send({ message: err.message });
         }
     }
+    
 
     async updateService(req, res) {
         try {
@@ -31,12 +44,13 @@ class ServiceController {
 
     async findAll(req, res) {
         try {
-            const services = await Service.find({});
+            const services = await Service.find({ etat: true });
             res.status(200).send(services);
         } catch (err) {
             res.status(500).send({ message: err.message });
         }
     }
+    
 
     async findServiceDispo(req, res) {
         try {

@@ -1,10 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors'); // Ajout de cette ligne
 require('dotenv').config();
 
 const app = express();
 
+app.use(cors()); // Ajout de cette ligne
 app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -22,7 +24,6 @@ db.on('disconnected', () => {
     console.log('Déconnecté de MongoDB');
 });
 
-
 const serviceRoutes = require('./routes/service.routes');
 const utilisateurRoutes = require('./routes/utilisateur.routes');
 const tacheRoutes = require('./routes/tache.routes');
@@ -33,9 +34,6 @@ app.use('/utilisateurs', utilisateurRoutes);
 app.use('/taches', tacheRoutes);
 app.use('/rendezvous', rdvRoutes);
 app.use('/manager', manager);
-
-
-
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

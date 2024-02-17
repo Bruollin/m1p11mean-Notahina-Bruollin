@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-liste-services',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListeServicesComponent implements OnInit {
 
-  constructor() { }
+  // constructor() { }
+
+  // ngOnInit() {
+  // }
+  services: any[] = [];
+
+  constructor(private apiService: ApiService) {}
 
   ngOnInit() {
+    this.apiService.getServices().subscribe((data: any[]) => {
+      this.services = data;
+    });
   }
 
 }

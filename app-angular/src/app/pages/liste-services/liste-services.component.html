@@ -1,4 +1,4 @@
-  <div class="container-fluid mt--9">
+  <!-- <div class="container-fluid mt--9">
     <div class="row">
       <div class="col-xl-3 order-xl-2 mb-5 mb-xl-0">
         <div class="card card-profile shadow">
@@ -200,4 +200,31 @@
       </div>
     </div>
   </div>
-  
+   -->
+   <!-- chemin-vers-le-template-de-votre-composant.html -->
+<div class="container-fluid mt--9">
+  <div class="row">
+    <div class="col-xl-3 order-xl-2 mb-5 mb-xl-0" *ngFor="let service of services">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img [src]="'assets/img/services/' + service.name + '.png'" class="rounded-circle">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+          <div class="text-center" style="margin-top: 110px;">
+            <h3>{{ service.name }}</h3>
+            <h3>Prix : {{ service.price }} Ar</h3>
+            <h3>Durée : {{ service.duration }}h</h3>
+            <!-- <a href="#!" class="btn btn-info">Voir plus</a> -->
+            <button class="btn btn-success" [routerLink]="['/detail-service']">Prendre un rendez-vous</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
