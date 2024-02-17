@@ -221,7 +221,7 @@
             <h3>Prix : {{ service.price }} Ar</h3>
             <h3>Durée : {{ service.duration }}h</h3>
             <!-- <a href="#!" class="btn btn-info">Voir plus</a> -->
-            <button class="btn btn-success" [routerLink]="['/detail-service']">Prendre un rendez-vous</button>
+            <button class="btn btn-success" [routerLink]="['/detail-service', service._id]">Prendre un rendez-vous</button>
           </div>
         </div>
       </div>

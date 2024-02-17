@@ -1,106 +1,108 @@
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+    style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
     <!-- Mask -->
     <span class="mask bg-gradient-danger opacity-8"></span>
-  </div>
-  <div class="container-fluid mt--9">
+</div>
+<div class="container-fluid mt--9">
     <div class="row">
-      <div class="col-xl-4 order-xl-1 mb-5 mb-xl-0">
-        <div class="card card-profile shadow">
-          <div class="row justify-content-center">
-            <div class="col-lg-3 order-lg-2">
-              <div class="card-profile-image">
-                <a href="javascript:void(0)">
-                  <img src="assets/img/services/Soin de cheveux.png" class="rounded-circle">
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-            <div class="d-flex justify-content-between">
-            </div>
-          </div>
-          <div class="card-body pt-0 pt-md-4">
-            <div class="row">
-              <div class="col">
-                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                  <div>
-                    <span class="heading">20.000 Ar</span>
-                    <span class="description">Prix</span>
-                  </div>
-                  <!-- <div>
+        <div class="col-xl-4 order-xl-1 mb-5 mb-xl-0">
+            <div class="card card-profile shadow">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 order-lg-2">
+                        <div class="card-profile-image">
+                            <a href="javascript:void(0)">
+                                <img src="assets/img/services/{{ service.name }}.png" class="rounded-circle">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                    <div class="d-flex justify-content-between">
+                    </div>
+                </div>
+                <div class="card-body pt-0 pt-md-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                <div>
+                                    <span class="heading">{{ service.price }} Ar</span>
+                                    <span class="description">Prix</span>
+                                </div>
+                                <!-- <div>
                     <span class="heading">10</span>
                     <span class="description">Photos</span>
                   </div> -->
-                  <div>
-                    <span class="heading">2h</span>
-                    <span class="description">Durée</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="text-center">
-              <h3>
-                Soin des cheveux
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-8 order-xl-2">
-        <div class="card bg-secondary shadow">
-          <div class="card-header bg-white border-0">
-            <div class="row align-items-center">
-              <div class="col-8">
-                <h3 class="mb-0">Prendre un rendez-vous</h3>
-              </div>
-              <div class="col-4 text-right">
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <form>
-              <div class="pl-lg-4">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-username">Date du rendez-vous</label>
-                      <input type="date" class="form-control" id="appointmentDate" placeholder="Sélectionner une date">
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-email">Heure</label>
-                      <input type="time" class="form-control" id="appointmentDate" placeholder="Sélectionner une heure">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="select-service">Choisir un employé</label>
-                          <select id="select-service" class="form-control form-control-alternative">
-                            <option value="service1">Nouta</option>
-                            <option value="service2">Miora</option>
-                            <option value="service3">Sabrina</option>
-                          </select>
+                                <div>
+                                    <span class="heading">{{ service.duration }}h</span>
+                                    <span class="description">Durée</span>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                  <div class="col-lg-6">
-                  </div>
+                    </div>
+                    <div class="text-center">
+                        <h3>{{ service.name }}</h3>
+                    </div>
                 </div>
-                <div class="row">
-                  <div class="col-lg-6">
-                    <a href="#!" class="btn btn-sm btn-primary">Valider</a>
-                  </div>
-                  <div class="col-lg-6">
-                  </div>
-                </div>
-              </div>
-            
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
+        <div class="col-xl-8 order-xl-2">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">Prendre un rendez-vous</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-username">Date du
+                                            rendez-vous</label>
+                                        <input type="date" class="form-control" id="appointmentDate"
+                                            placeholder="Sélectionner une date" [(ngModel)]="date_rendez_vous">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">Heure</label>
+                                        <input type="time" class="form-control" id="appointmentDate"
+                                            placeholder="Sélectionner une heure" [(ngModel)]="heure_rendez_vous">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="select-service">Choisir un
+                                            employé</label>
+                                        <select id="select-service" class="form-control form-control-alternative">
+                                            <option value="service1">Nouta</option>
+                                            <option value="service2">Miora</option>
+                                            <option value="service3">Sabrina</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a (click)="addRendezVous()" class="btn btn-sm btn-primary">Valider</a>
+                                </div>
+                                <div class="col-lg-6">
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  
+</div>
