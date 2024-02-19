@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/:id', utilisateurController.findById);
 router.get('/', utilisateurController.findAll);
 router.get('/disponible', utilisateurController.findUtilisateurDispo);
-router.post('/', utilisateurController.ajouterUtilisateur);
+router.post('/ajout', utilisateurController.ajouterUtilisateur);
 router.put('/:id', utilisateurController.updateUtilisateur);
 router.post('/login', utilisateurController.login);
 

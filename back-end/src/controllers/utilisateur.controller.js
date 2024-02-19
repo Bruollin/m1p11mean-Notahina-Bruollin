@@ -61,8 +61,12 @@ class UtilisateurController {
                 message: 'Authentication successful',
                 user: {
                     _id: user._id,
-                    name: user.name,
+                    firstname: user.firstname,
+                    lastname: user.lastname,
                     email: user.email,
+                    num_phone: user.num_phone,
+                    address: user.address,
+                    gender: user.gender,
                 }
             });
         } catch (err) {

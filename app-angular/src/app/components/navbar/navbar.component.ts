@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     const loggedInUser = this.auth.getLoggedInUser();
-    this.loggedInUserName = loggedInUser ? loggedInUser.name : '';
+    this.loggedInUserName = loggedInUser ? (loggedInUser.firstname != undefined ? loggedInUser.firstname : '') + ' ' + (loggedInUser.lastname != undefined ? loggedInUser.lastname : '')  : '';
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -35,6 +35,13 @@ export class NavbarComponent implements OnInit {
         }
     }
     return 'Dashboard';
+  }
+
+  logout(): void {
+    
+    this.auth.logout();
+    
+    this.router.navigate(['/login']);
   }
 
 }

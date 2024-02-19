@@ -13,4 +13,8 @@ export class AuthService {
   getLoggedInUser(): any {
     return this.loggedInUser;
   }
+
+  logout(): void {
+    this.setLoggedInUser(null);
+  }
 }
