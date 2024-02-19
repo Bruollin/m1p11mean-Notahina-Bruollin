@@ -5,8 +5,9 @@ const employeSchema = new mongoose.Schema({
     Name : String,
     email: String,
     password: String,
+    preferences : Number,
     date_insertion: { type: Date, default: Date.now },
-    etat: { type: Number}, 
+    etat: { type: Number}
     
 });
 
