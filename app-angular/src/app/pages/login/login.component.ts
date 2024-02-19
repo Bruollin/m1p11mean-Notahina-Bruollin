@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
+import { AuthService } from 'src/app/components/navbar/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,19 +20,19 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {}
 
   signIn(email: string, password: string): void {
     this.authService.login(email, password).subscribe(
       (response) => {
-        // Authentication successful
-        // You may want to store user details in a service or local storage
-        // Redirect to the desired page, for example:
+        this.auth.setLoggedInUser(response.user);
+
+        console.log('UserLog : ',response );
         this.router.navigate(['/accueil']);
       },
       (error) => {
-        // Handle authentication error (e.g., display an error message)
         console.error('Authentication failed', error);
       }
     );
