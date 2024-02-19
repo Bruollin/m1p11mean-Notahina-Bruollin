@@ -35,16 +35,24 @@
           </div>
         </div>
         <div class="card-body px-lg-5 py-lg-5">
-          <div class="text-center text-muted mb-4">
+          <!-- <div class="text-center text-muted mb-4">
             <small>Or sign up with credentials</small>
-          </div>
+          </div> -->
           <form role="form">
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                 </div>
-                <input class="form-control" placeholder="Name" type="text">
+                <input class="form-control" placeholder="Nom" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" placeholder="Prénom" type="text">
               </div>
             </div>
             <div class="form-group">
@@ -53,6 +61,14 @@
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
                 <input class="form-control" placeholder="Email" type="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" placeholder="Numéro de téléphone" type="number">
               </div>
             </div>
             <div class="form-group">
@@ -78,6 +94,13 @@
               <button type="button" class="btn btn-primary mt-4" [routerLink]="['/dashboard']">Create account</button>
             </div>
           </form>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-6">
+        </div>
+        <div class="col-6 text-right">
+          <a href="javascript:void(0)" class="text-light" [routerLink]="['/login']"><small>Already have an account ?</small></a>
         </div>
       </div>
     </div>
