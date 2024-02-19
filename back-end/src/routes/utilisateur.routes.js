@@ -9,5 +9,6 @@ router.get('/', utilisateurController.findAll);
 router.get('/disponible', utilisateurController.findUtilisateurDispo);
 router.post('/', utilisateurController.ajouterUtilisateur);
 router.put('/:id', utilisateurController.updateUtilisateur);
+router.post('/login', utilisateurController.login);
 
 module.exports = router;
