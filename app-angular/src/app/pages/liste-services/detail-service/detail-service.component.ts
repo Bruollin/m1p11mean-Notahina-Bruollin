@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from '../service.service';
 import { HttpClient } from '@angular/common/http';
+import { API_BASE_URL } from 'src/app/api-config';
 
 @Component({
   selector: 'app-detail-service',
@@ -10,10 +11,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DetailServiceComponent implements OnInit {
 
-  // constructor() { }
-
-  // ngOnInit() {
-  // }
   serviceId: string;
   service: any;
   client_id: string;
@@ -48,11 +45,9 @@ export class DetailServiceComponent implements OnInit {
       etat: 1,
     };
 
-    // Envoyez la requête POST à l'API
-    this.http.post('http://localhost:3000/rendezvous', requestBody).subscribe(
+    this.http.post(API_BASE_URL + 'rendezvous', requestBody).subscribe(
       (response) => {
         console.log('Rendez-vous ajouté avec succès!', response);
-        // Réinitialisez les champs du formulaire ou effectuez d'autres actions si nécessaire
       },
       (error) => {
         console.error("Erreur lors de l'ajout du rendez-vous", error);

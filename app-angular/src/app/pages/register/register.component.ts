@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { API_BASE_URL } from 'src/app/api-config';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,7 @@ export class RegisterComponent implements OnInit {
       gender: this.gender
     };
 
-    this.http.post<any>('http://localhost:3000/utilisateurs/ajout', formData)
+    this.http.post<any>(API_BASE_URL + 'utilisateurs/ajout', formData)
       .subscribe(
         response => {
           this.router.navigate(['/login']);
