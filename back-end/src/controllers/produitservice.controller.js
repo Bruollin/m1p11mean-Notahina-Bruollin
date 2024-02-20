@@ -51,6 +51,9 @@ class ProduitServiceController {
         try {
             const serviceId = req.params.service_id;
             const produitsServices = await ProduitService.find({ service_id: serviceId });
+            if (!produitsServices || produitsServices.length === 0) {
+                return res.status(404).send({ message: "Aucun produit trouvé pour cet identifiant de service." });
+            }
             const produitsIds = produitsServices.map(produitService => produitService.produit_id);
             const produits = await Produit.find({ _id: { $in: produitsIds } });
             res.status(200).send(produits);
