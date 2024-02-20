@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from '../service.service';
 import { HttpClient } from '@angular/common/http';
 import { API_BASE_URL } from 'src/app/api-config';
+import { AuthService } from 'src/app/components/navbar/auth.service';
 
 @Component({
   selector: 'app-detail-service',
@@ -19,12 +20,15 @@ export class DetailServiceComponent implements OnInit {
   date_rendez_vous: string;
   heure_rendez_vous: string;
   etat: boolean;
+  employees: any[];
+  products: any[];
 
   constructor(
     private route: ActivatedRoute,
     private serviceService: ServiceService,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    private auth: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -33,12 +37,27 @@ export class DetailServiceComponent implements OnInit {
         this.service = data;
       });
     });
+
+    this.http.get(API_BASE_URL + 'employe/byService/' + this.serviceId)
+      .subscribe((response: any[]) => {
+        this.employees = response;
+      });
+      
+    this.http.get(API_BASE_URL + 'produitservice/get-all-produit/' + this.serviceId)
+    .subscribe((response: any[]) => {
+      this.products = response;
+    });
   }
-  
+
+  updateEmployeeId(employeeId: string) {
+    this.employee_id = employeeId;
+  }
+
   addRendezVous() {
+    const loggedInUser = this.auth.getLoggedInUser();
     const requestBody = {
-      client_id: "65c51111792fdbe360c5086d",
-      employee_id: "65c51111792fdbe360c5086d",
+      client_id: loggedInUser._id,
+      employee_id: this.employee_id,
       service_id: this.serviceId,
       date_rendez_vous: this.date_rendez_vous,
       heure_rendez_vous: this.heure_rendez_vous,
