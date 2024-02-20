@@ -33,6 +33,7 @@ const manager = require('./routes/manager.routes');
 const employe = require('./routes/employe.routes');
 const produit = require('./routes/produit.routes');
 const produitservice = require('./routes/produitservice.routes');
+const statistique = require('./routes/statistique.routes');
 app.use('/services', serviceRoutes);
 app.use('/utilisateurs', utilisateurRoutes);
 app.use('/taches', tacheRoutes);
@@ -41,6 +42,7 @@ app.use('/manager', manager);
 app.use('/employe', employe);
 app.use('/produit', produit);
 app.use('/produitservice', produitservice);
+app.use('/statistique', statistique);
 
 
 
