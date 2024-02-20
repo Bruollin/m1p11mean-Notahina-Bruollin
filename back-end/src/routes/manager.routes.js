@@ -9,5 +9,6 @@ router.get('/', managerController.findAll);
 router.get('/disponible', managerController.findManagerDispo);
 router.post('/', managerController.ajouterManager);
 router.put('/:id', managerController.updateManager);
+router.post('/login', managerController.login);
 
 module.exports = router;
