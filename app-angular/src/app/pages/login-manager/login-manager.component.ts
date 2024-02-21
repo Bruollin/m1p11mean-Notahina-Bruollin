@@ -28,9 +28,7 @@ export class LoginManagerComponent implements OnInit {
     this.authService.login(email, password).subscribe(
       (response) => {
         this.auth.setLoggedInUser(response.user);
-
-        console.log('UserLog : ',response );
-        this.router.navigate(['/accueil']);
+        this.router.navigate(['/accueil-manager']);
       },
       (error) => {
         console.error('Authentication failed', error);

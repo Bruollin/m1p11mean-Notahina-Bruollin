@@ -5,12 +5,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { ManagerLayoutComponent } from './layouts/manager-layout/manager-layout.component';
 
 const routes: Routes =[
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
+  }, {
+    path: '',
+    component: ManagerLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('src/app/layouts/manager-layout/manager-layout.module').then(m => m.ManagerLayoutModule)
+      }
+    ]
   }, {
     path: '',
     component: AdminLayoutComponent,

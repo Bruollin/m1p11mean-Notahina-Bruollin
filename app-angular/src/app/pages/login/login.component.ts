@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(email, password).subscribe(
       (response) => {
         this.auth.setLoggedInUser(response.user);
-
-        console.log('UserLog : ',response );
         this.router.navigate(['/accueil']);
       },
       (error) => {
