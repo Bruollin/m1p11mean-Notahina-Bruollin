@@ -3,6 +3,51 @@ const Service = require('../models/service.model');
 const Utilisateur = require('../models/utilisateur.model');
 
 const employe = require('../models/employe.model');
+async function statistiqueDureeMoyenneTravailParEmploye() {
+    try {
+        const rdv = await Rdv.find({}).populate({
+            path: 'employe_id',
+            model: 'employe',
+            select: '-password'
+        }).populate({
+            path: 'service_id',
+            model: 'Service'
+        });
+
+        // Dictionnaire pour stocker la durée totale de travail par employé
+        let dureeTotaleParEmploye = {};
+        // Dictionnaire pour stocker le nombre de rendez-vous par employé
+        let nombreDeRdvParEmploye = {};
+
+        // Calculer la durée totale de travail et le nombre de rendez-vous pour chaque employé
+        rdv.forEach(r => {
+            const employeId = r.employe_id; // Convertissez l'ID en chaîne pour assurer la cohérence
+            const firstname = employe.firstname;
+            const duree = r.service_id.duration || 0; // Durée du service (en heures)
+
+            dureeTotaleParEmploye[employeId] = (dureeTotaleParEmploye[employeId] || 0) + duree;
+            nombreDeRdvParEmploye[employeId] = (nombreDeRdvParEmploye[employeId] || 0) + 1;
+        });
+
+        // Calculer la durée moyenne de travail pour chaque employé
+        let dureeMoyenneParEmploye = {};
+        Object.keys(dureeTotaleParEmploye).forEach(employeId => {
+            dureeMoyenneParEmploye[employeId] = dureeTotaleParEmploye[employeId] / nombreDeRdvParEmploye[employeId];
+        });
+
+        return dureeMoyenneParEmploye;
+    } catch (err) {
+        throw new Error(err.message);
+    }
+}
+statistiqueDureeMoyenneTravailParEmploye()
+    .then(dureeMoyenneParEmploye => {
+        console.log("Durée moyenne de travail par employé :");
+        console.log(dureeMoyenneParEmploye);
+    })
+    .catch(err => {
+        console.error("Erreur :", err.message);
+    });
 
 class RdvController {
     async ajouterRdv(req, res) {
@@ -107,5 +152,6 @@ class RdvController {
     }
     
     
+   
 }
 module.exports = new RdvController();
