@@ -7,6 +7,8 @@ const router = express.Router();
 router.get('/:id', rdvController.findById);
 router.get('/', rdvController.findAll);
 router.get('/disponible', rdvController.findRdvDispo);
+router.post('/client/:client_id', rdvController.findAllRdvWithClientId);
+router.post('/employe/:employe_id', rdvController.findRdvByEmployeId);
 router.post('/', rdvController.ajouterRdv);
 router.put('/:id', rdvController.updateRdv);
 
