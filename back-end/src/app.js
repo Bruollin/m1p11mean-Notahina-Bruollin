@@ -34,6 +34,7 @@ const employe = require('./routes/employe.routes');
 const produit = require('./routes/produit.routes');
 const produitservice = require('./routes/produitservice.routes');
 const statistique = require('./routes/statistique.routes');
+const depense = require('./routes/depense.routes');
 app.use('/services', serviceRoutes);
 app.use('/utilisateurs', utilisateurRoutes);
 app.use('/taches', tacheRoutes);
@@ -43,6 +44,7 @@ app.use('/employe', employe);
 app.use('/produit', produit);
 app.use('/produitservice', produitservice);
 app.use('/statistique', statistique);
+app.use('/depense', depense);
 
 
 
