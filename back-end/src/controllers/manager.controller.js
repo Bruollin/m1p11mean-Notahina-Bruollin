@@ -60,10 +60,9 @@ class ManagerController {
                 message: 'Authentication successful',
                 user: {
                     _id: user._id,
-                    firstname: String,
-                    lastname: String,
-                    email: String,
-                    password: String,
+                    firstname: user.firstname,
+                    lastname: user.lastname,
+                    email: user.email
                 }
             });
         } catch (err) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../login/authentication.service';
-import { AuthService } from 'src/app/components/navbar/auth.service';
+import { ManagerAuthService } from './manager-auth.service';
+import { ManagerService } from 'src/app/components/navbar-manager/manager.service';
 
 @Component({
   selector: 'app-login-manager',
@@ -19,15 +19,15 @@ export class LoginManagerComponent implements OnInit {
   }
 
   constructor(
-    private authService: AuthenticationService,
+    private authService: ManagerAuthService,
     private router: Router,
-    private auth: AuthService
+    private auth: ManagerService
   ) {}
 
   signIn(email: string, password: string): void {
     this.authService.login(email, password).subscribe(
       (response) => {
-        this.auth.setLoggedInUser(response.user);
+        this.auth.setLoggedInManager(response.user);
         this.router.navigate(['/accueil-manager']);
       },
       (error) => {

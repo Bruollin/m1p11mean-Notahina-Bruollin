@@ -4,17 +4,17 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ManagerService {
-  private loggedInUser: any;
+  private loggedInManager: any;
 
-  setLoggedInUser(user: any): void {
-    this.loggedInUser = user;
+  setLoggedInManager(user: any): void {
+    this.loggedInManager = user;
   }
 
-  getLoggedInUser(): any {
-    return this.loggedInUser;
+  getLoggedInManager(): any {
+    return this.loggedInManager;
   }
 
   logout(): void {
-    this.setLoggedInUser(null);
+    this.setLoggedInManager(null);
   }
 }

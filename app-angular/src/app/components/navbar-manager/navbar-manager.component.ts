@@ -21,7 +21,8 @@ export class NavbarManagerComponent implements OnInit {
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-    const loggedInUser = this.auth.getLoggedInUser();
+    const loggedInUser = this.auth.getLoggedInManager();
+    console.log('User : ', loggedInUser);
     this.loggedInUserName = loggedInUser ? (loggedInUser.firstname != undefined ? loggedInUser.firstname : '') + ' ' + (loggedInUser.lastname != undefined ? loggedInUser.lastname : '')  : '';
   }
   getTitle(){
@@ -42,7 +43,7 @@ export class NavbarManagerComponent implements OnInit {
     
     this.auth.logout();
     
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login-manager']);
   }
 
 }
