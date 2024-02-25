@@ -59,7 +59,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                   </div>
-                  <select class="form-control" name="manager" required>
+                  <select [(ngModel)]="selectedRole" class="form-control" name="manager" required>
                     <option value="Employe">Employé</option>
                     <option value="Manager">Manager</option>
                   </select>
@@ -69,7 +69,7 @@
                   <a class="text-light" class="text-muted" [routerLink]="['/login']">Login as Simple user</a>
               </div>
               <div class="text-center">
-                <button type="button" class="btn btn-primary my-4" (click)="signIn(email, password)">Sign in</button>
+                <button type="button" class="btn btn-primary my-4" (click)="signInOrNot()">Sign in</button>
               </div>
             </form>
           </div>

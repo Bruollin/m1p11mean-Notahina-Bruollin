@@ -69,11 +69,12 @@ class EmployeController {
                 message: 'Authentication successful',
                 user: {
                     _id: user._id,
-                    Name : String,
-                    email: String,
-                    password: String,
-                    preferences : Number,
-                    }
+                    service_id: user.service_id,
+                    firstname : user.firstname,
+                    lastname : user.lastname,
+                    email: user.email,
+                    preferences : user.preferences
+                }
             });
         } catch (err) {
             res.status(500).json({ message: err.message });

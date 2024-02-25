@@ -12,17 +12,27 @@ export class LoginManagerComponent implements OnInit {
 
   email: string = '';
   password: string = '';
-
-  ngOnInit() {
-  }
-  ngOnDestroy() {
-  }
+  selectedRole: string = 'Employe'; // Default role is Employé
 
   constructor(
     private authService: ManagerAuthService,
     private router: Router,
     private auth: ManagerService
   ) {}
+
+  ngOnInit() {
+  }
+
+  ngOnDestroy() {
+  }
+
+  signInOrNot(): void {
+    if (this.selectedRole === 'Manager') {
+      this.signIn(this.email, this.password);
+    } else {
+      this.notManagerSignIn(); 
+    }
+  }
 
   signIn(email: string, password: string): void {
     this.authService.login(email, password).subscribe(
@@ -36,4 +46,7 @@ export class LoginManagerComponent implements OnInit {
     );
   }
 
+  notManagerSignIn(): void {
+    console.log('Not a manager');
+  }
 }
