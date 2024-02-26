@@ -40,21 +40,21 @@ async function statistiqueDureeMoyenneTravailParEmploye() {
         throw new Error(err.message);
     }
 }
-/*statistiqueDureeMoyenneTravailParEmploye()
+statistiqueDureeMoyenneTravailParEmploye()
     .then(dureeMoyenneParEmploye => {
         console.log("Durée moyenne de travail par employé :");
         console.log(dureeMoyenneParEmploye);
     })
     .catch(err => {
         console.error("Erreur :", err.message);
-    });*/
+    });
 
 class RdvController {
     async sendReminderEmail(req, res) {
         const subject = 'Rappel de rendez-vous';
         const now = new Date();
         const formattedDate = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
-        const text = `<p class="reminder-text">Ceci est un rappel de votre rendez-vous prévu pour <strong>${formattedDate}</strong>.</p>`;
+        const text = `<p class="reminder-text">Ceci est un rappel de votre rendez-vous prévu pour le<strong>${formattedDate}</strong>.</p>`;
         
         const mailUtilsInstance = new MailUtils();
         try {
