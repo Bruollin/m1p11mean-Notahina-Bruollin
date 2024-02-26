@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { ManagerLayoutComponent } from './layouts/manager-layout/manager-layout.component';
+import { EmployeeLayoutComponent } from './layouts/employee-layout/employee-layout.component';
 
 const routes: Routes =[
   {
@@ -22,6 +23,15 @@ const routes: Routes =[
       }
     ]
   }, {
+    path: '',
+    component: EmployeeLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('src/app/layouts/employee-layout/employee-layout.module').then(m => m.EmployeeLayoutModule)
+      }
+    ]
+  },  {
     path: '',
     component: AdminLayoutComponent,
     children: [

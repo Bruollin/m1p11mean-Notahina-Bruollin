@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { ManagerLayoutComponent } from './layouts/manager-layout/manager-layout.component';
+import { EmployeeLayoutComponent } from './layouts/employee-layout/employee-layout.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ManagerLayoutComponent } from './layouts/manager-layout/manager-layout.
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    ManagerLayoutComponent
+    ManagerLayoutComponent,
+    EmployeeLayoutComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ManagerAuthService } from './manager-auth.service';
 import { ManagerService } from 'src/app/components/navbar-manager/manager.service';
+import { EmployeeService } from 'src/app/components/navbar-employee/employee.service';
 
 @Component({
   selector: 'app-login-manager',
@@ -17,7 +18,8 @@ export class LoginManagerComponent implements OnInit {
   constructor(
     private authService: ManagerAuthService,
     private router: Router,
-    private auth: ManagerService
+    private auth: ManagerService,
+    private authEmployee: EmployeeService
   ) {}
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class LoginManagerComponent implements OnInit {
     if (this.selectedRole === 'Manager') {
       this.signIn(this.email, this.password);
     } else {
-      this.notManagerSignIn(); 
+      this.signInEmployee(this.email, this.password);
     }
   }
 
@@ -39,6 +41,18 @@ export class LoginManagerComponent implements OnInit {
       (response) => {
         this.auth.setLoggedInManager(response.user);
         this.router.navigate(['/accueil-manager']);
+      },
+      (error) => {
+        console.error('Authentication failed', error);
+      }
+    );
+  }
+
+  signInEmployee(email: string, password: string): void {
+    this.authService.loginEmployee(email, password).subscribe(
+      (response) => {
+        this.authEmployee.setLoggedInEmployee(response.user);
+        this.router.navigate(['/accueil-employee']);
       },
       (error) => {
         console.error('Authentication failed', error);
