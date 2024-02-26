@@ -1,8 +1,8 @@
 const Rdv = require('../models/rendezvous.model');
 const Service = require('../models/service.model');
 const Utilisateur = require('../models/utilisateur.model');
-
 const employe = require('../models/employe.model');
+const MailUtils = require('../utils/mailUtils.util');
 async function statistiqueDureeMoyenneTravailParEmploye() {
     try {
         const rdv = await Rdv.find({}).populate({
@@ -40,16 +40,32 @@ async function statistiqueDureeMoyenneTravailParEmploye() {
         throw new Error(err.message);
     }
 }
-statistiqueDureeMoyenneTravailParEmploye()
+/*statistiqueDureeMoyenneTravailParEmploye()
     .then(dureeMoyenneParEmploye => {
         console.log("Durée moyenne de travail par employé :");
         console.log(dureeMoyenneParEmploye);
     })
     .catch(err => {
         console.error("Erreur :", err.message);
-    });
+    });*/
 
 class RdvController {
+    async sendReminderEmail(req, res) {
+        const subject = 'Rappel de rendez-vous';
+        const now = new Date();
+        const formattedDate = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+        const text = `<p class="reminder-text">Ceci est un rappel de votre rendez-vous prévu pour <strong>${formattedDate}</strong>.</p>`;
+        
+        const mailUtilsInstance = new MailUtils();
+        try {
+            await mailUtilsInstance.sendReminderEmail('noutahiana01@gmail.com', subject, text);
+            res.status(201).send(subject+""+text);
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi de l\'e-mail :', error);
+            res.status(500).send({ message: err.message });
+        }
+    }
+    
     async ajouterRdv(req, res) {
         try {
             const rdv = new Rdv(req.body);
