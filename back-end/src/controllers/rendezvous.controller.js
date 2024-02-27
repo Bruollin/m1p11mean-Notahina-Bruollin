@@ -135,7 +135,7 @@ class RdvController {
                 model: 'Utilisateur',
                 select: '-password'
             }).populate({
-                path: 'employee_id',
+                path: 'employe_id',
                 model: 'employe',
                 select: '-password'
             });
