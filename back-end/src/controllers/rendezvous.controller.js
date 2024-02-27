@@ -17,16 +17,14 @@ class RdvController {
                 model: 'Service'
             });
     
-            // Dictionnaire pour stocker la durée totale de travail par employé
+            
             let dureeTotaleParEmploye = {};
-            // Dictionnaire pour stocker le nombre de rendez-vous par employé
             let nombreDeRdvParEmploye = {};
     
-            // Calculer la durée totale de travail et le nombre de rendez-vous pour chaque employé
             rdv.forEach(r => {
-                const employeId = r.employe_id; // Convertissez l'ID en chaîne pour assurer la cohérence
+                const employeId = r.employe_id; 
                 const firstname = employe.firstname;
-                const duree = r.service_id.duration || 0; // Durée du service (en heures)
+                const duree = r.service_id.duration || 0; 
     
                 dureeTotaleParEmploye[employeId] = (dureeTotaleParEmploye[employeId] || 0) + duree;
                 nombreDeRdvParEmploye[employeId] = (nombreDeRdvParEmploye[employeId] || 0) + 1;
@@ -38,10 +36,32 @@ class RdvController {
                 dureeMoyenneParEmploye[employeId] = dureeTotaleParEmploye[employeId] / nombreDeRdvParEmploye[employeId];
             });
     
-            //return dureeMoyenneParEmploye;
             res.status(201).send(dureeMoyenneParEmploye);
         } catch (err) {
-            //throw new Error(err.message);
+            res.status(500).send({ message: err.message });
+        }
+    }
+    async  statChiffreAffairesParJM(req, res) { 
+        try {
+            const rdvs = await Rdv.find({}).populate({
+                path: 'service_id',
+                model: 'Service',
+                select: 'price' 
+            });
+    
+            const chiffreAffairesParJour = {};
+            const chiffreAffairesParMois = {};
+            rdvs.forEach(rdv => {
+                const date = new Date(rdv.date_rendez_vous);
+                const jour = date.toISOString().split('T')[0]; // Récupérer la date au format YYYY-MM-DD
+                const mois = date.toISOString().split('-').slice(0, 2).join('-'); // Récupérer la date au format YYYY-MM
+                const prixService = rdv.service_id.price;
+                chiffreAffairesParJour[jour] = (chiffreAffairesParJour[jour] || 0) + prixService;
+                chiffreAffairesParMois[mois] = (chiffreAffairesParMois[mois] || 0) + prixService;
+            });
+            
+            res.status(200).json({ chiffreAffairesParJour, chiffreAffairesParMois });
+        } catch (err) {
             res.status(500).send({ message: err.message });
         }
     }
@@ -54,9 +74,8 @@ class RdvController {
             // boucle et compter
             rdv.forEach(r => {
                 const date = new Date(r.date_rendez_vous);
-                const jour = date.toISOString().split('T')[0]; // Récupérer la date au format YYYY-MM-DD
-                const mois = date.toISOString().split('-').slice(0, 2).join('-'); // Récupérer la date au format YYYY-MM
-    
+                const jour = date.toISOString().split('T')[0]; 
+                const mois = date.toISOString().split('-').slice(0, 2).join('-'); 
                 // Compter les réservations par jour
                 reservationsParJour[jour] = (reservationsParJour[jour] || 0) + 1;
     

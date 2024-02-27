@@ -12,6 +12,7 @@ router.post('/employe/:employe_id', rdvController.findRdvByEmployeId);
 
 router.post('/statDureeMoyenne', rdvController.statistiqueDureeMoyenneTravailParEmploye);
 router.post('/statReservation', rdvController.StatReservationJM);
+router.post('/statChiffreAffaire', rdvController.statChiffreAffairesParJM);
 router.post('/', rdvController.ajouterRdv);
 router.put('/:id', rdvController.updateRdv);
 router.post('/send-reminder-email', rdvController.sendReminderEmail);
