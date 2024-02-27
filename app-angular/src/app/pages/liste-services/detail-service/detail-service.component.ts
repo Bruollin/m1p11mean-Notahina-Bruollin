@@ -73,5 +73,9 @@ export class DetailServiceComponent implements OnInit {
       }
     );
   }
+  
+  handleImageError(event: any) {
+    event.target.src = 'assets/img/services/services.jpg';
+  }
 
 }

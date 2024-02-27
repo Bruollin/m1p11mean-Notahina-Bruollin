@@ -6,7 +6,7 @@ const MailUtils = require('../utils/mailUtils.util');
 
 
 class RdvController {
-    async  statistiqueDureeMoyenneTravailParEmploye(req, res) {
+    async statistiqueDureeMoyenneTravailParEmploye(req, res) {
         try {
             const rdv = await Rdv.find({}).populate({
                 path: 'employe_id',
@@ -17,23 +17,27 @@ class RdvController {
                 model: 'Service'
             });
     
-            
             let dureeTotaleParEmploye = {};
             let nombreDeRdvParEmploye = {};
     
-            rdv.forEach(r => {
-                const employeId = r.employe_id; 
-                const firstname = employe.firstname;
-                const duree = r.service_id.duration || 0; 
+            for (const r of rdv) {
+                try {
+                    const employe = r.employe_id;
+                    const employeId = `${employe.firstname} ${employe.lastname}`;
+                    const duree = r.service_id.duration || 0;
     
-                dureeTotaleParEmploye[employeId] = (dureeTotaleParEmploye[employeId] || 0) + duree;
-                nombreDeRdvParEmploye[employeId] = (nombreDeRdvParEmploye[employeId] || 0) + 1;
-            });
+                    dureeTotaleParEmploye[employeId] = (dureeTotaleParEmploye[employeId] || 0) + duree;
+                    nombreDeRdvParEmploye[employeId] = (nombreDeRdvParEmploye[employeId] || 0) + 1;
+                } catch (error) {
+                    console.error(error);
+                }
+            }
     
-            // Calculer la durée moyenne de travail pour chaque employé
+            // Calcul de la durée moyenne de travail pour chaque employé
             let dureeMoyenneParEmploye = {};
             Object.keys(dureeTotaleParEmploye).forEach(employeId => {
-                dureeMoyenneParEmploye[employeId] = dureeTotaleParEmploye[employeId] / nombreDeRdvParEmploye[employeId];
+                const moyenne = dureeTotaleParEmploye[employeId] / nombreDeRdvParEmploye[employeId];
+                dureeMoyenneParEmploye[employeId] = parseFloat(moyenne.toFixed(2));
             });
     
             res.status(201).send(dureeMoyenneParEmploye);
@@ -41,6 +45,8 @@ class RdvController {
             res.status(500).send({ message: err.message });
         }
     }
+    
+    
     async  statChiffreAffairesParJM(req, res) { 
         try {
             const rdvs = await Rdv.find({}).populate({
