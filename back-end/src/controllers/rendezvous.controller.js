@@ -3,53 +3,71 @@ const Service = require('../models/service.model');
 const Utilisateur = require('../models/utilisateur.model');
 const employe = require('../models/employe.model');
 const MailUtils = require('../utils/mailUtils.util');
-async function statistiqueDureeMoyenneTravailParEmploye() {
-    try {
-        const rdv = await Rdv.find({}).populate({
-            path: 'employe_id',
-            model: 'employe',
-            select: '-password'
-        }).populate({
-            path: 'service_id',
-            model: 'Service'
-        });
 
-        // Dictionnaire pour stocker la durée totale de travail par employé
-        let dureeTotaleParEmploye = {};
-        // Dictionnaire pour stocker le nombre de rendez-vous par employé
-        let nombreDeRdvParEmploye = {};
-
-        // Calculer la durée totale de travail et le nombre de rendez-vous pour chaque employé
-        rdv.forEach(r => {
-            const employeId = r.employe_id; // Convertissez l'ID en chaîne pour assurer la cohérence
-            const firstname = employe.firstname;
-            const duree = r.service_id.duration || 0; // Durée du service (en heures)
-
-            dureeTotaleParEmploye[employeId] = (dureeTotaleParEmploye[employeId] || 0) + duree;
-            nombreDeRdvParEmploye[employeId] = (nombreDeRdvParEmploye[employeId] || 0) + 1;
-        });
-
-        // Calculer la durée moyenne de travail pour chaque employé
-        let dureeMoyenneParEmploye = {};
-        Object.keys(dureeTotaleParEmploye).forEach(employeId => {
-            dureeMoyenneParEmploye[employeId] = dureeTotaleParEmploye[employeId] / nombreDeRdvParEmploye[employeId];
-        });
-
-        return dureeMoyenneParEmploye;
-    } catch (err) {
-        throw new Error(err.message);
-    }
-}
-statistiqueDureeMoyenneTravailParEmploye()
-    .then(dureeMoyenneParEmploye => {
-        console.log("Durée moyenne de travail par employé :");
-        console.log(dureeMoyenneParEmploye);
-    })
-    .catch(err => {
-        console.error("Erreur :", err.message);
-    });
 
 class RdvController {
+    async  statistiqueDureeMoyenneTravailParEmploye(req, res) {
+        try {
+            const rdv = await Rdv.find({}).populate({
+                path: 'employe_id',
+                model: 'employe',
+                select: '-password'
+            }).populate({
+                path: 'service_id',
+                model: 'Service'
+            });
+    
+            // Dictionnaire pour stocker la durée totale de travail par employé
+            let dureeTotaleParEmploye = {};
+            // Dictionnaire pour stocker le nombre de rendez-vous par employé
+            let nombreDeRdvParEmploye = {};
+    
+            // Calculer la durée totale de travail et le nombre de rendez-vous pour chaque employé
+            rdv.forEach(r => {
+                const employeId = r.employe_id; // Convertissez l'ID en chaîne pour assurer la cohérence
+                const firstname = employe.firstname;
+                const duree = r.service_id.duration || 0; // Durée du service (en heures)
+    
+                dureeTotaleParEmploye[employeId] = (dureeTotaleParEmploye[employeId] || 0) + duree;
+                nombreDeRdvParEmploye[employeId] = (nombreDeRdvParEmploye[employeId] || 0) + 1;
+            });
+    
+            // Calculer la durée moyenne de travail pour chaque employé
+            let dureeMoyenneParEmploye = {};
+            Object.keys(dureeTotaleParEmploye).forEach(employeId => {
+                dureeMoyenneParEmploye[employeId] = dureeTotaleParEmploye[employeId] / nombreDeRdvParEmploye[employeId];
+            });
+    
+            //return dureeMoyenneParEmploye;
+            res.status(201).send(dureeMoyenneParEmploye);
+        } catch (err) {
+            //throw new Error(err.message);
+            res.status(500).send({ message: err.message });
+        }
+    }
+    async  StatReservationJM(req, res) { // statistique de reservation par jours et mois
+        try {
+            const rdv = await Rdv.find({});
+            const reservationsParJour = {};
+            const reservationsParMois = {};
+    
+            // boucle et compter
+            rdv.forEach(r => {
+                const date = new Date(r.date_rendez_vous);
+                const jour = date.toISOString().split('T')[0]; // Récupérer la date au format YYYY-MM-DD
+                const mois = date.toISOString().split('-').slice(0, 2).join('-'); // Récupérer la date au format YYYY-MM
+    
+                // Compter les réservations par jour
+                reservationsParJour[jour] = (reservationsParJour[jour] || 0) + 1;
+    
+                // Compter les réservations par mois
+                reservationsParMois[mois] = (reservationsParMois[mois] || 0) + 1;
+            });
+            res.status(200).json({ reservationsParJour, reservationsParMois });
+        } catch (err) {
+            res.status(500).send({ message: err.message });
+        }
+    }
     async sendReminderEmail(req, res) {
         const subject = 'Rappel de rendez-vous';
         const now = new Date();
