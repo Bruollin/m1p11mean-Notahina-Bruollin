@@ -40,11 +40,16 @@ class RdvController {
                 dureeMoyenneParEmploye[employeId] = parseFloat(moyenne.toFixed(2));
             });
     
-            res.status(201).send(dureeMoyenneParEmploye);
+            const resultatFinal = {
+                dureeMoyenneDeTravailParEmployee: dureeMoyenneParEmploye
+            };
+    
+            res.status(201).send(resultatFinal);
         } catch (err) {
             res.status(500).send({ message: err.message });
         }
     }
+    
     
     
     async  statChiffreAffairesParJM(req, res) { 
