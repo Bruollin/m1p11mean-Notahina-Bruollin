@@ -9,5 +9,6 @@ router.get('/', depenseController.findAll);
 router.get('/disponible', depenseController.findDepenseDispo);
 router.post('/', depenseController.ajouterDepense);
 router.put('/:id', depenseController.updateDepense);
+router.get('/calculDepense', depenseController.calculerDepensesParMois);
 
 module.exports = router;
