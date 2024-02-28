@@ -147,7 +147,7 @@ class RdvController {
             const rdv = await Rdv.find({}).populate({
                 path: 'service_id',
                 model: 'Service',
-                select : 'name price'
+                select : 'name price commission_pourcentage'
             }).populate({
                 path: 'client_id',
                 model: 'Utilisateur',
@@ -209,8 +209,39 @@ class RdvController {
             res.status(500).send({ message: err.message });
         }
     }
+    async  calculateCommissionParMois(req, res) {
+        try {
+            const rdvs = await Rdv.find({}).populate({
+                path: 'service_id',
+                model: 'Service',
+                select: 'price commission_pourcentage'
+            });
     
+            const commissionExpensesByMonth = {};
     
+            rdvs.forEach(rdv => {
+                const { price, commission_pourcentage } = rdv.service_id;
+                const commissionExpense = price * (commission_pourcentage / 100);
+    
+                const date = new Date(rdv.date_rendez_vous);
+                const year = date.getFullYear();
+                const month = date.getMonth() + 1; 
+    
+                const key = `${year}-${month}`;
+                
+                if (!commissionExpensesByMonth[key]) {
+                    commissionExpensesByMonth[key] = 0;
+                }
+    
+                commissionExpensesByMonth[key] += commissionExpense;
+            });
+    
+            res.status(200).send(commissionExpensesByMonth);
+        } catch (err) {
+            res.status(500).send({ message: err.message });
+        }
+    }
+            
    
 }
 module.exports = new RdvController();
