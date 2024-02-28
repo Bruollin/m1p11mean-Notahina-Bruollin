@@ -146,15 +146,16 @@ class RdvController {
         try {
             const rdv = await Rdv.find({}).populate({
                 path: 'service_id',
-                model: 'Service'
+                model: 'Service',
+                select : 'name price'
             }).populate({
                 path: 'client_id',
                 model: 'Utilisateur',
-                select: '-password'
+                select: 'firstname'
             }).populate({
                 path: 'employe_id',
                 model: 'employe',
-                select: '-password'
+                select: 'firstname'
             });
             res.status(200).send(rdv);
         } catch (err) {
@@ -200,10 +201,6 @@ class RdvController {
             }).populate({
                 path: 'client_id',
                 model: 'Utilisateur',
-                select: 'firstname'
-            }).populate({
-                path: 'employe_id',
-                model: 'employe',
                 select: 'firstname'
             });
     
