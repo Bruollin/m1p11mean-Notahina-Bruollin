@@ -183,7 +183,7 @@ class RdvController {
             }).populate({
                 path: 'employe_id',
                 model: 'employe',
-                select: 'firstname'
+                select: 'firstname preferences'
             });
             res.status(200).send(rdv);
         } catch (err) {
