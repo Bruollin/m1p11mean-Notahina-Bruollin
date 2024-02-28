@@ -7,12 +7,11 @@
       <div class="col-lg-7 col-md-10">
         <h1 class="display-2 text-white">Hello Jesse</h1>
         <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-        <a href="#!" class="btn btn-info">Edit profile</a>
       </div>
     </div>
   </div>
 </div>
-<div class="container-fluid mt--7">
+<div class="container-fluid mt--9">
   <div class="row">
     <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
       <div class="card card-profile shadow">
@@ -33,10 +32,8 @@
             </div>
           </div>
           <div class="text-center mt-5">
-            <h3>
-              Jessica Jones
-            </h3>
-            
+            <h3>{{ loggedInUser?.firstname }} {{ loggedInUser?.lastname }}</h3>
+            <p>{{ loggedInUser?.email }}</p>
           </div>
         </div>
       </div>
@@ -58,13 +55,13 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-first-name">Nom</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Nom" value="Lucky">
+                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Nom" [value]="loggedInUser.firstname">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-last-name">Prénom</label>
-                    <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Prénom" value="Jesse">
+                    <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Prénom" [value]="loggedInUser.lastname">
                   </div>
                 </div>
               </div>
@@ -72,7 +69,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-email">Email</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
+                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com" [value]="loggedInUser.email">
                   </div>
                 </div>
               </div>
@@ -85,15 +82,19 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-address">Adresse</label>
-                    <input id="input-address" class="form-control form-control-alternative" placeholder="Adresse" value="" type="text">
+                    <input id="input-address" class="form-control form-control-alternative" placeholder="Adresse" value="" type="text" [value]="loggedInUser.address">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-address">Numéro de téléphone</label>
-                    <input id="input-address" class="form-control form-control-alternative" placeholder="Numéro de téléphone" value="" type="number">
+                    <input id="input-address" class="form-control form-control-alternative" placeholder="Numéro de téléphone" value="" type="number" [value]="loggedInUser.num_phone">
                   </div>
                 </div>
+              </div>
+              <br>
+              <div class="row">
+                <button class="btn btn-info" (click)="updateUserData()">Enregistrer</button>
               </div>
             </div>
           </form>
