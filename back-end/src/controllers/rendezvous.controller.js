@@ -4,6 +4,8 @@ const Utilisateur = require('../models/utilisateur.model');
 const employe = require('../models/employe.model');
 const MailUtils = require('../utils/mailUtils.util');
 
+const Depense = require('../models/depense.model');
+
 
 class RdvController {
     async statistiqueDureeMoyenneTravailParEmploye(req, res) {
@@ -209,7 +211,7 @@ class RdvController {
             res.status(500).send({ message: err.message });
         }
     }
-    async  calculateCommissionParMois(req, res) {
+    async  calculateCommissionParMois(req, res) { 
         try {
             const rdvs = await Rdv.find({}).populate({
                 path: 'service_id',
@@ -232,9 +234,20 @@ class RdvController {
                 if (!commissionExpensesByMonth[key]) {
                     commissionExpensesByMonth[key] = 0;
                 }
-    
                 commissionExpensesByMonth[key] += commissionExpense;
             });
+            const depenses = [];
+        for (const key in commissionExpensesByMonth) {
+            if (commissionExpensesByMonth.hasOwnProperty(key)) {
+                const depense = new Depense({
+                    designation: 'Commission',
+                    prix: commissionExpensesByMonth[key].toString(), 
+                    date_insertion: new Date(key) 
+                });
+                depenses.push(depense);
+            }
+        }
+        await Depense.insertMany(depenses);
     
             res.status(200).send(commissionExpensesByMonth);
         } catch (err) {
