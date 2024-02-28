@@ -254,6 +254,32 @@ class RdvController {
             res.status(500).send({ message: err.message });
         }
     }
+    async calculerBeneficesParMois(req, res) {
+        try {
+            
+            const chiffreAffairesParMois = await this.statChiffreAffairesParJM();
+            const depensesParMois = await calculerDepensesParMois();
+            const beneficesParMois = {};
+            Object.keys(chiffreAffairesParMois).forEach(mois => {
+                
+                const depenseDuMois = depensesParMois.find(depense => depense.mois === mois);
+                
+                if (depenseDuMois) {
+                    
+                    const benefice = chiffreAffairesParMois[mois] - depenseDuMois.totalDepense;
+                    beneficesParMois[mois] = benefice;
+                } else {
+                    
+                    beneficesParMois[mois] = chiffreAffairesParMois[mois];
+                }
+            });
+            
+            console.log(beneficesParMois);
+            res.status(200).json(beneficesParMois);
+        } catch (err) {
+            res.status(500).send({ message: err.message });
+        }
+    }
             
    
 }

@@ -13,6 +13,7 @@ router.post('/statDureeMoyenne', rdvController.statistiqueDureeMoyenneTravailPar
 router.post('/statReservation', rdvController.StatReservationJM);
 router.post('/statChiffreAffaire', rdvController.statChiffreAffairesParJM);
 router.post('/commissionParMois', rdvController.calculateCommissionParMois);
+router.post('/benefParMois', rdvController.calculerBeneficesParMois);
 router.post('/', rdvController.ajouterRdv);
 router.put('/:id', rdvController.updateRdv);
 router.post('/send-reminder-email', rdvController.sendReminderEmail);
