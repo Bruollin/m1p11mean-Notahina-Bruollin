@@ -8,6 +8,9 @@ const Depense = require('../models/depense.model');
 
 
 class RdvController {
+    constructor() {
+        this.statChiffreAffairesParJM = this.statChiffreAffairesParJM.bind(this);
+    }
     async statistiqueDureeMoyenneTravailParEmploye(req, res) {
         try {
             const rdv = await Rdv.find({}).populate({
@@ -258,6 +261,7 @@ class RdvController {
         try {
             
             const chiffreAffairesParMois = await this.statChiffreAffairesParJM();
+            console.log('Bénéfice: ');
             const depensesParMois = await calculerDepensesParMois();
             const beneficesParMois = {};
             Object.keys(chiffreAffairesParMois).forEach(mois => {
@@ -274,7 +278,7 @@ class RdvController {
                 }
             });
             
-            console.log(beneficesParMois);
+            // console.log('Bénéfice: ',beneficesParMois);
             res.status(200).json(beneficesParMois);
         } catch (err) {
             res.status(500).send({ message: err.message });
