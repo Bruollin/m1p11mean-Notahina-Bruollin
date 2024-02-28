@@ -9,7 +9,7 @@ const app = express();
 app.use(cors()); 
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://noutahiana01:bruollinNouta123@cluster0.5crr7cl.mongodb.net/Cluster0?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connexion à MongoDB établie avec succès');
     })
