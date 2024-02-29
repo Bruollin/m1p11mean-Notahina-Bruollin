@@ -1,105 +1,39 @@
-<!-- Dark table -->
+<!-- Tableau -->
 <div class="container-fluid">
-    <div class="row mt-5">
+  <div class="row mt-5">
       <div class="col">
-        <div class="card bg-default shadow">
-          <div class="card-header bg-transparent border-0">
-            <div class="row">
-              <div class="col-md-10">
-                <h3 class="text-white mb-0">Liste des employés</h3>
+          <div class="card bg-default shadow">
+              <div class="card-header bg-transparent border-0">
+                  <div class="row">
+                      <div class="col-md-10">
+                          <h3 class="text-white mb-0">Liste des employés</h3>
+                      </div>
+                  </div>
               </div>
-            </div>
+              <div class="table-responsive">
+                  <table class="table align-items-center table-dark table-flush">
+                      <thead class="thead-dark">
+                          <tr>
+                              <th scope="col">Nom</th>
+                              <th scope="col">Prénom</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Préférences</th>
+                              <th scope="col">Date d'insertion</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <!-- Utilise la syntaxe Angular pour afficher les données -->
+                          <tr *ngFor="let employee of employees">
+                              <td>{{ employee.lastname }}</td>
+                              <td>{{ employee.firstname }}</td>
+                              <td>{{ employee.email }}</td>
+                              <td [innerHTML]="generateStars(employee.preferences)"></td>
+                              <td>{{ formatDate(employee.date_insertion) }}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
           </div>
-          <div class="table-responsive">
-            <table class="table align-items-center table-dark table-flush">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Prénom</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Préferences</th>
-                  <th scope="col">Date d'insertion</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">
-                    <div class="media align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">Randria</span>
-                      </div>
-                    </div>
-                  </th>
-                  <td>
-                    <div class="media align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">Manantena</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="media align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">randria@gmail.com</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <span class="mr-2">60%</span>
-                      <div>
-                        <div class="progress">
-                          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 60%;"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    25/02/2024
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <div class="media align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">Rasoa</span>
-                      </div>
-                    </div>
-                  </th>
-                  <td>
-                    <div class="media align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">Nirina</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="media align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">rasoa@gmail.com</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <span class="mr-2">90%</span>
-                      <div>
-                        <div class="progress">
-                          <div class="progress-bar bg-success" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                            aria-valuemax="90" style="width: 90%;"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    21/02/2024
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
-    </div>
   </div>
+</div>
