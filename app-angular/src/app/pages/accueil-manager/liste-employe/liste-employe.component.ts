@@ -10,6 +10,7 @@ import { API_BASE_URL } from 'src/app/api-config';
 export class ListeEmployeComponent implements OnInit {
 
  employees: any[] = [];
+ services: any[] = [];
  loading = true;
 
  constructor(private httpClient: HttpClient) { }
@@ -25,6 +26,17 @@ export class ListeEmployeComponent implements OnInit {
        this.loading = false;
      }
    );
+
+   this.httpClient.get<any[]>(API_BASE_URL + 'services').subscribe(
+    data => {
+      this.services = data;
+      this.loading = false;
+    },
+    error => {
+      console.error('Error fetching services data:', error);
+      this.loading = false;
+    }
+  );
  }
 
  generateStars(preferences: number): string {

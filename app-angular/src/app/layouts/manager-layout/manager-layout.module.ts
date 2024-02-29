@@ -12,6 +12,7 @@ import { AccueilManagerComponent } from 'src/app/pages/accueil-manager/accueil-m
 import { ListeEmployeComponent } from 'src/app/pages/accueil-manager/liste-employe/liste-employe.component';
 import { StatistiquesComponent } from 'src/app/pages/accueil-manager/statistiques/statistiques.component';
 import { StatistiquesGraphComponent } from 'src/app/pages/accueil-manager/statistiques-graph/statistiques-graph.component';
+import { GestionServicesComponent } from 'src/app/pages/accueil-manager/gestion-services/gestion-services.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { StatistiquesGraphComponent } from 'src/app/pages/accueil-manager/statis
     AccueilManagerComponent,
     ListeEmployeComponent,
     StatistiquesComponent,
-    StatistiquesGraphComponent
+    StatistiquesGraphComponent,
+    GestionServicesComponent
   ]
 })
 
