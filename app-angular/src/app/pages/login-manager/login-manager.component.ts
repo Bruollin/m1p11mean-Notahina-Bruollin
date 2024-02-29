@@ -13,7 +13,7 @@ export class LoginManagerComponent implements OnInit {
 
   email: string = '';
   password: string = '';
-  selectedRole: string = 'Employe'; // Default role is Employé
+  selectedRole: string = 'Manager';
 
   constructor(
     private authService: ManagerAuthService,
@@ -23,6 +23,13 @@ export class LoginManagerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.selectedRole === 'Manager') {
+      this.email = 'koto@gmail.com';
+      this.password = 'koto123';
+    } else {
+      this.email = 'nancie@gmail.com';
+      this.password = 'nancie123';
+    }
   }
 
   ngOnDestroy() {

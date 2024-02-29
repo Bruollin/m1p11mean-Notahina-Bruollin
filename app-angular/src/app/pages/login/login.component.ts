@@ -9,9 +9,8 @@ import { AuthService } from 'src/app/components/navbar/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  // constructor() {}
-  email: string = '';
-  password: string = '';
+  email: string = 'bruollin@gmail.com';
+  password: string = 'bruollin123';
 
   ngOnInit() {
   }

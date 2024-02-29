@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EmployeeLayoutRoutes } from './employee-layout.routing';
 import { AccueilEmployeeComponent } from 'src/app/pages/accueil-employee/accueil-employee.component';
 import { ListeRendezvousComponent } from 'src/app/pages/accueil-employee/liste-rendezvous/liste-rendezvous.component';
+import { ProfileEmployeeComponent } from 'src/app/pages/accueil-employee/profile-employee/profile-employee.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { ListeRendezvousComponent } from 'src/app/pages/accueil-employee/liste-r
   ],
   declarations: [
     AccueilEmployeeComponent,
-    ListeRendezvousComponent
+    ListeRendezvousComponent,
+    ProfileEmployeeComponent
   ]
 })
 

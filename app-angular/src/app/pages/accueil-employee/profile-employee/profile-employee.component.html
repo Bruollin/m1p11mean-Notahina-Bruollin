@@ -1,0 +1,87 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-6"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <h1 class="display-2 text-white">Bonjour {{ loggedInUser?.firstname }} {{ loggedInUser?.lastname }}</h1>
+          <p class="text-white mt-0 mb-5">Voici votre profil. Vous pouvez toujours le modifier à tout moment</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--9">
+    <div class="row">
+      <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+        <div class="card card-profile shadow">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class="card-profile-image">
+                <a href="javascript:void(0)">
+                  <img src="assets/img/theme/avatar.png" class="rounded-circle">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body pt-0 pt-md-4">
+            <div class="row">
+              <div class="col">
+                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-5">
+              <h3>{{ loggedInUser?.firstname }} {{ loggedInUser?.lastname }}</h3>
+              <p>{{ loggedInUser?.email }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-8 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Mon compte</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <form>
+              <h6 class="heading-small text-muted mb-4">Information de l'utilisateur</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-first-name">Nom</label>
+                      <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Nom" [value]="loggedInUser.firstname">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-last-name">Prénom</label>
+                      <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Prénom" [value]="loggedInUser.lastname">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-email">Email</label>
+                      <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com" [value]="loggedInUser.email">
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <button class="btn btn-info" (click)="updateUserData()">Enregistrer</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
