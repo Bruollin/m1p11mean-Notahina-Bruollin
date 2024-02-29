@@ -10,6 +10,7 @@ import { API_BASE_URL } from 'src/app/api-config';
 export class ListeEmployeComponent implements OnInit {
 
  employees: any[] = [];
+ loading = true;
 
  constructor(private httpClient: HttpClient) { }
 
@@ -17,9 +18,11 @@ export class ListeEmployeComponent implements OnInit {
    this.httpClient.get<any[]>(API_BASE_URL + 'employe').subscribe(
      data => {
        this.employees = data;
+       this.loading = false;
      },
      error => {
        console.error('Erreur lors de la récupération des données :', error);
+       this.loading = false;
      }
    );
  }

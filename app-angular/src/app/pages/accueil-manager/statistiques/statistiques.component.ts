@@ -15,6 +15,8 @@ export class StatistiquesComponent implements OnInit {
   reservationsParMois: any = {};
   chiffreAffairesParJour: any = {};
   chiffreAffairesParMois: any = {};
+  showStatistics: boolean = true;
+  loading = true; 
 
   constructor(private http: HttpClient, private reservationService: StatistiquesService) { }
 
@@ -29,6 +31,7 @@ export class StatistiquesComponent implements OnInit {
 
     this.http.post(apiUrl, {}).subscribe((data: any) => {
       this.processData(data);
+      this.loading = false;
     });
   }
 
@@ -53,7 +56,7 @@ export class StatistiquesComponent implements OnInit {
   getMonths(obj: any): string[] {
     return Object.keys(obj);
   }
-  
+
   loadChiffreAffaires() {
     this.reservationService.getChiffreAffairesStats().subscribe(data => {
       this.chiffreAffairesParJour = data.chiffreAffairesParJour;
@@ -63,5 +66,9 @@ export class StatistiquesComponent implements OnInit {
 
   getEntries(obj: any): any[] {
     return Object.entries(obj);
+  }
+
+  toggleStatistics() {
+    this.showStatistics = !this.showStatistics;
   }
 }
