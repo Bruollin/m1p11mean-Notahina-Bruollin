@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkargon_dashboard_angular=self.webpackChunkargon_dashboard_angular||[]).push([[592],{9942:(u,a,s)=>{s.d(a,{C:()=>_});const _="http://localhost:3000/"}}]);
