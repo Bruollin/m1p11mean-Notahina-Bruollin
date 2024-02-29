@@ -23,8 +23,7 @@ export class UserProfileComponent implements OnInit {
       lastname: this.loggedInUser.lastname,
       email: this.loggedInUser.email,
       num_phone: this.loggedInUser.num_phone,
-      address: this.loggedInUser.address,
-      gender: this.loggedInUser.gender
+      address: this.loggedInUser.address
     };
 
     this.http.put<any>(API_BASE_URL+'utilisateurs/'+userId, updatedUserData)
