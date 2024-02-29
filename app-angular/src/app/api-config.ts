@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'http://localhost:3000/';
+export const API_BASE_URL = 'https://m1p11mean-notahina-bruollin-d998.onrender.com/';
